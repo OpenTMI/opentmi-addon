@@ -17,7 +17,7 @@ function isSingleton(base, lockFilePath = __dirname) {
       super(...args);
       this.__instance = `${uuid()}`;
       this._cleanup = () =>
-        this._unlock()
+        Singleton._unlock()
     }
     get _instanceId() {
       return this.__instance;
@@ -32,7 +32,7 @@ function isSingleton(base, lockFilePath = __dirname) {
             process.once('SIGINT', this._cleanup);
             process.once('beforeExit', this._cleanup);
             return super.register(...args)
-              .catch(err => this._unlock()
+              .catch(err => Singleton._unlock()
                 .then(() => {
                   throw err;
                 }));
@@ -69,7 +69,7 @@ function isSingleton(base, lockFilePath = __dirname) {
         .then(data => data.toString() === this._instanceId)
         .then((mine) => {
           if (mine) {
-            return this._unlock();
+            return Singleton._unlock();
           }
           return undefined;
         })
@@ -81,7 +81,7 @@ function isSingleton(base, lockFilePath = __dirname) {
         });
     }
 
-    _unlock() {
+    static _unlock() {
       return fsUnlink(Singleton._lockFile).return(true);
     }
   }
