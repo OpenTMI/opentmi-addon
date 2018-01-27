@@ -19,12 +19,12 @@ class TestClass {
   }
 }
 
-describe('singleton', function() {
-  it('is singleton', function() {
+describe('singleton', function () {
+  it('is singleton', function () {
     const STest = isSingleton(TestClass);
     expect(STest.name).to.be.equal('Singleton');
   });
-  it('behaviours like singleton', function() {
+  it('behaviours like singleton', function () {
     const STest = isSingleton(TestClass);
     const test1 = new STest();
     const pending1 = test1.register()

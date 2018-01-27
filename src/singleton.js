@@ -17,7 +17,7 @@ function isSingleton(base, lockFilePath = __dirname) {
       super(...args);
       this.__instance = `${uuid()}`;
       this._cleanup = () =>
-        Singleton._unlock()
+        Singleton._unlock();
     }
     get _instanceId() {
       return this.__instance;
