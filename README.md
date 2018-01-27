@@ -23,7 +23,7 @@ const {Addon} = require('opentmi-addon');
 
 class MyAddon extends Addon {
     constructor(...data) {
-        super(data);
+        super(...data);
         this.logger.info('MyAddon constructor');
     }
 }
@@ -43,7 +43,7 @@ Usage example:
 const {Addon, singleton} = require('opentmi-addon');
 class MyAddon extends Addon {
     constructor(...data) {
-        super(data);
+        super(...data);
         this.logger.info('MyAddon constructor');
     }
 }
