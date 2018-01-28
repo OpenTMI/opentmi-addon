@@ -6,6 +6,7 @@ const path = require('path');
 const Promise = require('bluebird');
 const uuid = require('uuid');
 const invariant = require('invariant');
+const _ = require('lodash');
 
 const fsWriteFile = Promise.promisify(fs.writeFile);
 const fsReadFile = Promise.promisify(fs.readFile);
@@ -37,7 +38,7 @@ function isSingleton(base, lockFilePath = __dirname) {
             this._registered = true;
             process.once('SIGINT', this._cleanup);
             process.once('beforeExit', this._cleanup);
-            invariant(_.isFunction(super.register), 'addon does not have register function')
+            invariant(_.isFunction(super.register), 'addon does not have register function');
             return super.register(...args)
               .catch(err => Singleton._unlock()
                 .then(() => {
