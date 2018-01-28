@@ -1,0 +1,42 @@
+{
+  "name": "opentmi-addon",
+  "version": "0.1.0",
+  "description": "OpenTMI addon base classes",
+  "scripts": {
+    "test": "make test",
+    "coverage": "make coverage",
+    "lint": "make lint",
+    "lint-fix": "make lint-fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/opentmi/opentmi-addon.git"
+  },
+  "author": "Jussi Vatjus-Anttila <jussiva@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/opentmi/opentmi-addon/issues"
+  },
+  "homepage": "https://github.com/opentmi/opentmi-addon#readme",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "eslint": "^4.16.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-chai-expect": "^1.1.1",
+    "eslint-plugin-chai-friendly": "^0.4.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-mocha": "^4.11.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^5.0.0",
+    "mocha-junit-reporter": "^1.17.0",
+    "sinon": "^4.2.2"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "invariant": "^2.2.2",
+    "lodash": "^4.17.4",
+    "uuid": "^3.2.1"
+  }
+}
