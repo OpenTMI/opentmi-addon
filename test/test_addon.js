@@ -15,7 +15,14 @@ describe('addon', function () {
     expect(addon.name).to.be.equal(6);
   });
   it('can parse args from object', function () {
-    const options = {app: 1, server: 2, io: 3, eventBus: 4, logger: 5, name: 6};
+    const options = {
+      app: 1,
+      server: 2,
+      io: 3,
+      eventBus: 4,
+      logger: 5,
+      name: 6
+    };
     const addon = new Addon(options);
     expect(addon.app).to.be.equal(1);
     expect(addon.server).to.be.equal(2);
