@@ -5,6 +5,7 @@ const path = require('path');
 //  3rd party modules
 const Promise = require('bluebird');
 const uuid = require('uuid');
+const invariant = require('invariant');
 
 const fsWriteFile = Promise.promisify(fs.writeFile);
 const fsReadFile = Promise.promisify(fs.readFile);
@@ -16,11 +17,15 @@ function isSingleton(base, lockFilePath = __dirname) {
     constructor(...args) {
       super(...args);
       this.__instance = `${uuid()}`;
+      this._registered = false;
       this._cleanup = () =>
         Singleton._unlock();
     }
     get _instanceId() {
       return this.__instance;
+    }
+    get isRegistered() {
+      return this._registered;
     }
     static get _lockFile() {
       return path.resolve(lockFilePath, `${base.name}.lock`);
@@ -29,11 +34,14 @@ function isSingleton(base, lockFilePath = __dirname) {
       return this._trylock()
         .then((locked) => {
           if (locked) {
+            this._registered = true;
             process.once('SIGINT', this._cleanup);
             process.once('beforeExit', this._cleanup);
+            invariant(_.isFunction(super.register), 'addon does not have register function')
             return super.register(...args)
               .catch(err => Singleton._unlock()
                 .then(() => {
+                  this._registered = false;
                   throw err;
                 }));
           }
@@ -44,6 +52,7 @@ function isSingleton(base, lockFilePath = __dirname) {
       return this._tryUnlock()
         .then((success) => {
           if (success) {
+            this._registered = false;
             process.removeListener('SIGINT', this._cleanup);
             process.removeListener('beforeExit', this._cleanup);
             return super.unregister(...args);
@@ -64,9 +73,13 @@ function isSingleton(base, lockFilePath = __dirname) {
         });
     }
 
-    _tryUnlock() {
+    isSingletonInstance() {
       return fsReadFile(Singleton._lockFile)
-        .then(data => data.toString() === this._instanceId)
+        .then(data => data.toString() === this._instanceId);
+    }
+
+    _tryUnlock() {
+      return this.isSingletonInstance()
         .then((mine) => {
           if (mine) {
             return Singleton._unlock();

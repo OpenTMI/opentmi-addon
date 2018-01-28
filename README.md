@@ -1,6 +1,6 @@
 # OpenTMI addon base class
 
-
+This module contains base class and utils for OpenTMI addons.
 
 ## API
 
@@ -35,8 +35,10 @@ module.exports = MyAddon;
 singleton mixer can be used to create addon which manage some
 background operations like analyse results. Those background operations
 is activated when `register` -function is called.
-Note that `register` is called only once even opentmi is started cluster mode.
+Note that `register` is called only once even opentmi is started ìn cluster mode.
 
+**getters**
+* `isRegistered`  is true for instance which contains singleton instance
 
 Usage example:
 ```
