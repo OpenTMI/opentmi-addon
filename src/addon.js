@@ -12,7 +12,8 @@ class Addon {
       io,
       eventBus,
       logger,
-      settings
+      settings,
+      mongoose
     } = Addon.parseArgs(...args);
     this._name = name;
     this._logger = logger;
@@ -21,6 +22,7 @@ class Addon {
     this._io = io;
     this._app = app;
     this._settings = settings;
+    this._mongoose = mongoose;
   }
   get name() { return this._name; }
   get logger() { return this._logger; }
@@ -29,6 +31,7 @@ class Addon {
   get io() { return this._io; }
   get app() { return this._app; }
   get settings() { return this._settings; }
+  get mongoose() { return this._mongoose; }
 
   static parseArgs(...args) {
     if (args.length === 1 && _.isObject(args[0])) {
@@ -40,8 +43,8 @@ class Addon {
       io: args[2],
       eventBus: args[3],
       logger: args[4],
-      name: args[5],
-      settings: args[6]
+      settings: args[5],
+      mongoose: args[6]
     };
   }
   register() {
