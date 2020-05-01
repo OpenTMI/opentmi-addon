@@ -6,7 +6,9 @@
     "test": "make test",
     "coverage": "make coverage",
     "lint": "make lint",
-    "lint-fix": "make lint-fix"
+    "lint-fix": "make lint-fix",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -39,6 +41,8 @@
     "bluebird": "^3.5.1",
     "invariant": "^2.2.4",
     "lodash": "^4.17.4",
-    "uuid": "^3.4.0"
-  }
+    "uuid": "^3.4.0",
+    "snyk": "^1.316.1"
+  },
+  "snyk": true
 }
