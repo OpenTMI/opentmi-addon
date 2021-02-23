@@ -38,7 +38,7 @@
   "dependencies": {
     "bluebird": "^3.5.1",
     "invariant": "^2.2.4",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.21",
     "uuid": "^3.4.0"
   }
 }
